@@ -1,25 +1,17 @@
 package day01
 
-import (
-	"unicode"
-)
+import "unicode"
 
-var threeLetterDigit = map[string]int{
-	"one": 1,
-	"two": 2,
-	"six": 6,
-}
-
-var fourLetterDigit = map[string]int{
-	"four": 4,
-	"five": 5,
-	"nine": 9,
-}
-
-var fiveLetterDigit = map[string]int{
+var digitMapping = map[string]int{
+	"one":   1,
+	"two":   2,
 	"three": 3,
+	"four":  4,
+	"five":  5,
+	"six":   6,
 	"seven": 7,
 	"eight": 8,
+	"nine":  9,
 }
 
 // TrebuchetOnlyDigit finds the sum of calibration where calibration is represented in numeric form in the given input
@@ -70,21 +62,21 @@ func getFirstDigitForCalibration(input string) int {
 			break
 		}
 		if i+3 < len(input) {
-			val, ok := threeLetterDigit[input[i:i+3]]
+			val, ok := digitMapping[input[i:i+3]]
 			if ok {
 				firstDigit = val
 				break
 			}
 		}
 		if i+4 < len(input) {
-			val, ok := fourLetterDigit[input[i:i+4]]
+			val, ok := digitMapping[input[i:i+4]]
 			if ok {
 				firstDigit = val
 				break
 			}
 		}
 		if i+5 < len(input) {
-			val, ok := fiveLetterDigit[input[i:i+5]]
+			val, ok := digitMapping[input[i:i+5]]
 			if ok {
 				firstDigit = val
 				break
@@ -102,21 +94,21 @@ func getLastDigitForCalibration(input string) int {
 			break
 		}
 		if i-3 >= 0 {
-			val, ok := threeLetterDigit[input[i-2:i+1]]
+			val, ok := digitMapping[input[i-2:i+1]]
 			if ok {
 				lastDigit = val
 				break
 			}
 		}
 		if i-4 >= 0 {
-			val, ok := fourLetterDigit[input[i-3:i+1]]
+			val, ok := digitMapping[input[i-3:i+1]]
 			if ok {
 				lastDigit = val
 				break
 			}
 		}
 		if i-5 >= 0 {
-			val, ok := fiveLetterDigit[input[i-4:i+1]]
+			val, ok := digitMapping[input[i-4:i+1]]
 			if ok {
 				lastDigit = val
 				break

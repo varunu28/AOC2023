@@ -2,7 +2,8 @@ package day01
 
 import "testing"
 
-var actualTestInput = []string{"tmmnhlxzpj1eightldxhjnone97",
+var actualTestInput = []string{
+	"tmmnhlxzpj1eightldxhjnone97",
 	"9fivekfpl855mjmfdqzvbn",
 	"two29eighteight1",
 	"4md",

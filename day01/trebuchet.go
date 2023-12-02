@@ -22,10 +22,20 @@ var fiveLetterDigit = map[string]int{
 	"eight": 8,
 }
 
+// TrebuchetOnlyDigit finds the sum of calibration where calibration is represented in numeric form in the given input
 func TrebuchetOnlyDigit(input []string) int {
 	sum := 0
 	for _, inp := range input {
 		sum += getDigitBasedCalibration(inp)
+	}
+	return sum
+}
+
+// TrebuchetDigitAndLetter finds the sum of calibration where calibration is represented both in numeric & text form in the given input
+func TrebuchetDigitAndLetter(input []string) int {
+	sum := 0
+	for _, inp := range input {
+		sum += getDigitAndLetterBasedCalibration(inp)
 	}
 	return sum
 }
@@ -46,14 +56,6 @@ func getDigitBasedCalibration(input string) int {
 		}
 	}
 	return firstDigit*10 + lastDigit
-}
-
-func TrebuchetDigitAndLetter(input []string) int {
-	sum := 0
-	for _, inp := range input {
-		sum += getDigitAndLetterBasedCalibration(inp)
-	}
-	return sum
 }
 
 func getDigitAndLetterBasedCalibration(input string) int {

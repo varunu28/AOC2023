@@ -1,6 +1,8 @@
 package day01
 
-import "unicode"
+import (
+	"unicode"
+)
 
 var digitMapping = map[string]int{
 	"one":   1,
@@ -51,69 +53,46 @@ func getDigitBasedCalibration(input string) int {
 }
 
 func getDigitAndLetterBasedCalibration(input string) int {
-	return getFirstDigitForCalibration(input)*10 + getLastDigitForCalibration(input)
+	firstDigit, lastDigit := getFirstAndLastDigit(input)
+	return firstDigit*10 + lastDigit
 }
 
-func getFirstDigitForCalibration(input string) int {
+func getFirstAndLastDigit(input string) (int, int) {
 	firstDigit := -1
+	lastDigit := -1
 	for i := range input {
+		digit := -1
 		if unicode.IsDigit(rune(input[i])) {
-			firstDigit = int(rune(input[i]) - '0')
-			break
+			digit = int(rune(input[i]) - '0')
 		}
-		if i+3 < len(input) {
+		if i+3 <= len(input) {
 			val, ok := digitMapping[input[i:i+3]]
 			if ok {
-				firstDigit = val
-				break
+				digit = val
 			}
 		}
-		if i+4 < len(input) {
+		if i+4 <= len(input) {
 			val, ok := digitMapping[input[i:i+4]]
 			if ok {
-				firstDigit = val
-				break
+				digit = val
 			}
 		}
-		if i+5 < len(input) {
+		if i+5 <= len(input) {
 			val, ok := digitMapping[input[i:i+5]]
 			if ok {
-				firstDigit = val
-				break
+				digit = val
+			}
+		}
+		if digit != -1 {
+			if firstDigit == -1 {
+				firstDigit = digit
+			} else {
+				lastDigit = digit
 			}
 		}
 	}
-	return firstDigit
-}
-
-func getLastDigitForCalibration(input string) int {
-	lastDigit := -1
-	for i := len(input) - 1; i >= 0; i-- {
-		if unicode.IsDigit(rune(input[i])) {
-			lastDigit = int(rune(input[i]) - '0')
-			break
-		}
-		if i-3 >= 0 {
-			val, ok := digitMapping[input[i-2:i+1]]
-			if ok {
-				lastDigit = val
-				break
-			}
-		}
-		if i-4 >= 0 {
-			val, ok := digitMapping[input[i-3:i+1]]
-			if ok {
-				lastDigit = val
-				break
-			}
-		}
-		if i-5 >= 0 {
-			val, ok := digitMapping[input[i-4:i+1]]
-			if ok {
-				lastDigit = val
-				break
-			}
-		}
+	if lastDigit == -1 {
+		lastDigit = firstDigit
 	}
-	return lastDigit
+	return firstDigit, lastDigit
 }
